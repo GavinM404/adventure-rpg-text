@@ -41,7 +41,16 @@ class World {
             // A non-food item should be instantiated as an instance of the `Item` class
             // A food item should be instantiated as an instance of the `Food` class
 
-        // Your code here
+            for (let index = 0; index < itemList.length; index++) {
+                const element = itemList[index];
+                if (element.type === 'food') {
+                  let newItem = new Food(element.name, element.description);
+                  this.rooms[element.room].items.push(newItem);
+                } else {
+                  let newItem = new Item(element.name, element.description);
+                  this.rooms[element.room].items.push(newItem);
+                }
+              }
     }
 }
 

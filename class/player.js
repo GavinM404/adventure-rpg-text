@@ -34,27 +34,36 @@ class Player {
     }
 
     takeItem(itemName) {
-        // Picks up an item from the current room into the player's inventory
+        const index = this.currentRoom.items.findIndex(item => item.name === itemName);
 
-        // Your code here
+         if (index !== -1) {
+            const item = this.currentRoom.items.splice(index, 1)[0];
+            this.items.push(item);
+       }
     }
 
     dropItem(itemName) {
-        // Drops an item the player is holding into their current room
+        const index = this.items.findIndex(item => item.name === itemName);
 
-        // Your code here
+         if (index !== -1) {
+            const item = this.items.splice(index, 1)[0];
+            this.currentRoom.items.push(item);
+       }
     }
 
     eatItem(itemName) {
-        // Allow the player to eat food items, but not non-food items
-
-        // Your code here
+        const index = this.items.findIndex(item => item.name === itemName);
+        const item = this.items.slice(index, 1)[0];
+        if (item instanceof Food) {
+            const item = this.items.splice(index, 1)[0];
+            console.log('Nom nom nom');
+        } else {
+            console.log(`${itemName} is not edible!!!`)
+        }
     }
 
     getItemByName(name) {
-        // Retrieves an item from a player's inventory by item name
-
-        // Your code here
+        return this.items.find(item => item.name === name)
     }
 }
 
